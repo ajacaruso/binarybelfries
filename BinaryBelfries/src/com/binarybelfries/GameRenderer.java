@@ -1,5 +1,6 @@
 package com.binarybelfries;
 
+import android.graphics.PointF;
 import android.opengl.GLSurfaceView;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -13,6 +14,7 @@ public class GameRenderer implements GLSurfaceView.Renderer {
     static public GameRenderer s_instance = null;
     static public final float BOARD_WIDTH = 40.0f;
     static public final float BOARD_HEIGHT = 40.0f;
+	static final PointF CENTER = new PointF((((BOARD_WIDTH/2) - 1.0f) + 1.0f), (((BOARD_HEIGHT/2) - 1.0f) + 1.0f));
 
     private final List<RenderObject> objects;
     private final List<RenderObject> toBeAdded;

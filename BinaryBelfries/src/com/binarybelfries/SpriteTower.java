@@ -36,8 +36,8 @@ public class SpriteTower extends RenderObject  {
         isVisible = true;
         
         //Set In Center of Screen
-        translation.y = (float) (((GameRenderer.BOARD_HEIGHT/2) - 1.0f) + 1.0f);
-        translation.x = (float) (((GameRenderer.BOARD_WIDTH/2) - 1.0f) + 1.0f);
+        translation.y = (float) GameRenderer.CENTER.y;
+        translation.x = (float) GameRenderer.CENTER.x;
         
         rotation = (float) (Math.random() * 360.0f);
     }
@@ -111,22 +111,22 @@ public class SpriteTower extends RenderObject  {
         axisY = Math.min(axisY, 1.0f);
         
         if (isStickNotCentered(axisX, axisY)) {
-            Log.i("Game", "Y: "+axisY+" X: "+axisX);
+            //Log.i("Game", "Y: "+axisY+" X: "+axisX);
             float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
             //Fix Inversion
             rotation = angle * -1;
-            Log.i("Game", "Test: "+angle);
+            //Log.i("Game", "Test: "+angle);
         }else{
         	//check over stick
             axisX = Math.min(c.getAxisValue(OuyaController.AXIS_RS_X), 1.0f);
             axisY = Math.min(c.getAxisValue(OuyaController.AXIS_RS_Y), 1.0f);
             
             if (isStickNotCentered(axisX, axisY)) {
-                Log.i("Game", "Y: "+axisY+" X: "+axisX);
+                //Log.i("Game", "Y: "+axisY+" X: "+axisX);
                 float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
                 //Fix Inversion
                 rotation = angle * -1;
-                Log.i("Game", "Test: "+angle);
+                //Log.i("Game", "Test: "+angle);
             }
         }
     }
@@ -176,4 +176,7 @@ public class SpriteTower extends RenderObject  {
         return super.doesCollide(other);
     }
     
+    public void die() {
+        //end the game
+    }
 }

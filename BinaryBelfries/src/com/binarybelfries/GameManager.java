@@ -12,6 +12,7 @@ import static com.binarybelfries.R.*;
 
 public class GameManager extends Activity {
 	private SpriteTower spriteTower;
+	private EnemyFactory enemyFactory;
 	
 	 @Override
 	    protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,14 @@ public class GameManager extends Activity {
 	        quitGame.setOnClickListener(new View.OnClickListener() {
 	            @Override
 	            public void onClick(View v) {
+	            	enemyFactory.endSpawning();
 	                finish();
 	            }
 	        });
 
 	        createWalls();
 	        createPlayer();
+	        createEnemyFactory();
 	        	
 	    }
 
@@ -100,5 +103,9 @@ public class GameManager extends Activity {
 
 	        spriteTower.init();
 	        return spriteTower;
+	    }
+	    
+	    private void createEnemyFactory(){
+	    	enemyFactory = new EnemyFactory(2, 2);
 	    }
 }

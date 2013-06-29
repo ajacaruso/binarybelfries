@@ -32,6 +32,11 @@ public class SpriteBullet extends RenderObject {
             	if (other instanceof SpriteWall) {
                     SpriteBullet.this.destroy();
                 }
+            	else if (other instanceof SpriteEnemy) {
+            		SpriteEnemy e = (SpriteEnemy) other;
+                    e.destroy();
+                    SpriteBullet.this.destroy();
+            	}
                 
             }
         });
