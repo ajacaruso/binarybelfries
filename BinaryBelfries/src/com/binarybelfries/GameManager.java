@@ -29,16 +29,9 @@ public class GameManager extends Activity {
 	            }
 	        });
 
-	        	spriteTower = new SpriteTower();
-	            // Create Tower if controller attached. Otherwise Display Error Screen.
-	            OuyaController ouyaController = OuyaController.getControllerByPlayer(0);
-	            if (ouyaController != null) {
-	                findOrCreatePlayer(ouyaController.getDeviceId());
-	            }else{
-	            	//ToDo: No Controller Error State. For now create player anyway.
-	            	findOrCreatePlayer(0);
-	            }
-	        
+	        createWalls();
+	        createPlayer();
+	        	
 	    }
 
 	    @Override
@@ -59,6 +52,40 @@ public class GameManager extends Activity {
 	        return handled || super.onGenericMotionEvent(event);
 	    }
 
+	    private void createWalls(){
+	    	
+	    	/* ToDo: Wall Should be off the Screen */
+	    	float wallWidth = GameRenderer.BOARD_WIDTH ;
+	    	float wallHeight = GameRenderer.BOARD_HEIGHT ;
+	    	int offset = -2;
+	    	int actionBaOffset = 2;
+	    	
+	    	//Left Wall
+	    	new SpriteWall(0, actionBaOffset, 0, wallHeight+offset);
+	    	
+	    	//Right Wall
+	    	new SpriteWall(wallWidth+offset, actionBaOffset, wallWidth+offset, wallHeight+offset);
+	    	
+	    	//Top Wall
+	    	new SpriteWall(0, actionBaOffset, wallWidth+offset, actionBaOffset);
+	    	
+	    	//Bottom Wall
+	    	new SpriteWall(0, wallHeight+offset, wallWidth+offset, wallHeight+offset);
+	    	
+	    }
+	    
+	    private void createPlayer(){
+	    	spriteTower = new SpriteTower();
+            // Create Tower if controller attached. Otherwise Display Error Screen.
+            OuyaController ouyaController = OuyaController.getControllerByPlayer(0);
+            if (ouyaController != null) {
+                findOrCreatePlayer(ouyaController.getDeviceId());
+            }else{
+            	//ToDo: No Controller Error State. For now create player anyway.
+            	findOrCreatePlayer(0);
+            }
+	    }
+	    
 	    private SpriteTower findOrCreatePlayer(int deviceId) {
 	        int playerNum = OuyaController.getPlayerNumByDeviceId(deviceId);
 	        if (playerNum < 0) {

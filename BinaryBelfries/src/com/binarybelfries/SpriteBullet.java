@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import javax.microedition.khronos.opengles.GL10;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
@@ -27,7 +28,11 @@ public class SpriteBullet extends RenderObject {
         setCollisionListener(new CollisionListener() {
             @Override
             public void onCollide(PointF prev, RenderObject me, RenderObject other) {
-               
+            	
+            	if (other instanceof SpriteWall) {
+                    SpriteBullet.this.destroy();
+                }
+                
             }
         });
     }

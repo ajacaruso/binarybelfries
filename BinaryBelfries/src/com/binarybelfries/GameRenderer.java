@@ -97,10 +97,10 @@ public class GameRenderer implements GLSurfaceView.Renderer {
     }
     
     public RenderObject getCollidingObject(RenderObject obj) {
-        /*
+        
     	for(RenderObject o : objects) {
         	
-            if (o != obj && o instanceof Wall) {
+            if (o != obj && o instanceof SpriteWall) {
                 if (o.doesCollide(obj)) {
                     return o;
                 }
@@ -109,14 +109,13 @@ public class GameRenderer implements GLSurfaceView.Renderer {
         }
         for(RenderObject o : objects) {
         	
-            if (o != obj && !(o instanceof Wall)) {
+            if (o != obj && !(o instanceof SpriteWall)) {
                 if (o.doesCollide(obj)) {
                     return o;
                 }
             }
             
         }
-        */
         return null;
     }
     

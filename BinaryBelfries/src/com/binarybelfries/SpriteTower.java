@@ -112,7 +112,7 @@ public class SpriteTower extends RenderObject  {
         
         if (isStickNotCentered(axisX, axisY)) {
             Log.i("Game", "Y: "+axisY+" X: "+axisX);
-            float angle = (float) Math.toDegrees(Math.atan2(axisX - 0, axisY - 0));
+            float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
             //Fix Inversion
             rotation = angle * -1;
             Log.i("Game", "Test: "+angle);
@@ -123,7 +123,7 @@ public class SpriteTower extends RenderObject  {
             
             if (isStickNotCentered(axisX, axisY)) {
                 Log.i("Game", "Y: "+axisY+" X: "+axisX);
-                float angle = (float) Math.toDegrees(Math.atan2(axisX - 0, axisY - 0));
+                float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
                 //Fix Inversion
                 rotation = angle * -1;
                 Log.i("Game", "Test: "+angle);
