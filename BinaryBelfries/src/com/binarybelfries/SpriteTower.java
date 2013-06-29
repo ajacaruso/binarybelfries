@@ -2,6 +2,7 @@ package com.binarybelfries;
 
 import android.graphics.Color;
 import android.graphics.PointF;
+import android.util.Log;
 import tv.ouya.console.api.OuyaController;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -103,7 +104,33 @@ public class SpriteTower extends RenderObject  {
             shootDir = fwdVec;
     	}
     }
-
+    private void setRotationFromController(OuyaController c) {
+        float axisX = c.getAxisValue(OuyaController.AXIS_LS_X);
+        axisX = Math.min(axisX, 1.0f);
+        float axisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
+        axisY = Math.min(axisY, 1.0f);
+        
+        if (isStickNotCentered(axisX, axisY)) {
+            Log.i("Game", "Y: "+axisY+" X: "+axisX);
+            float angle = (float) Math.toDegrees(Math.atan2(axisX - 0, axisY - 0));
+            //Fix Inversion
+            rotation = angle * -1;
+            Log.i("Game", "Test: "+angle);
+        }else{
+        	//check over stick
+            axisX = Math.min(c.getAxisValue(OuyaController.AXIS_RS_X), 1.0f);
+            axisY = Math.min(c.getAxisValue(OuyaController.AXIS_RS_Y), 1.0f);
+            
+            if (isStickNotCentered(axisX, axisY)) {
+                Log.i("Game", "Y: "+axisY+" X: "+axisX);
+                float angle = (float) Math.toDegrees(Math.atan2(axisX - 0, axisY - 0));
+                //Fix Inversion
+                rotation = angle * -1;
+                Log.i("Game", "Test: "+angle);
+            }
+        }
+    }
+    
     @Override
     protected void update() {
         if (!isValid()) {
@@ -117,6 +144,7 @@ public class SpriteTower extends RenderObject  {
         }
 
         super.update();
+        setRotationFromController(c);
         getShootDirFromController(c);
 
         
