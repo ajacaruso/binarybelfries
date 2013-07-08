@@ -2,18 +2,37 @@
  * 
  */
 package com.binarybelfries;
+import android.os.Handler;
+import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
-/**
- * @author Phil
- *
- */
+public class EnemyFactory {
+	
+	private static final String TAG = "Enemy Factory";
+	
+	private Handler enemyHandler = new Handler();
+	
+	final Runnable spawnEnemy = new Runnable()
+	{
+	    public void run() 
+	    {
+	    	enemyHandler.postDelayed(this, 4000);
+	    	SpriteEnemy enemy = new SpriteEnemy();
+			enemy.init();
+			Log.i(TAG, "create enemy");
+	        
+	    }
+	};
+	public EnemyFactory() {		
+		
+		enemyHandler.postDelayed(spawnEnemy, 4000);
+		
+	}
+
+}
+
+/*
+
 public class EnemyFactory {
 	
 	private static class SpawnEnemyTask implements Runnable
@@ -36,9 +55,9 @@ public class EnemyFactory {
 	private Runnable spawnEnemyTask;
 	private ScheduledFuture<?> spawnEnemyFuture;
 	  
-	/**
-	 * create a new enemy factory with initial delay before 1st enemy spawns, and delay between enemies
-	 */
+	
+	//create a new enemy factory with initial delay before 1st enemy spawns, and delay between enemies
+	 
 	public EnemyFactory(long initialDelay, long delayBetweenEnemies) {		
 		this.initialDelay = initialDelay;
 		this.delayBetweenRuns = delayBetweenEnemies;
@@ -66,3 +85,4 @@ public class EnemyFactory {
 	}
 
 }
+*/

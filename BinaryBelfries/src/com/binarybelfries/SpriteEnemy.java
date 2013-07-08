@@ -55,7 +55,9 @@ public class SpriteEnemy extends RenderObject {
         isVisible = true;
         
         // Set initial random starting position on edge of screen
-        StartingEdge startAt = StartingEdge.values()[(int)(Math.random() * (StartingEdge.values().length + 1))];
+        
+       // StartingEdge startAt = StartingEdge.values()[(int)(Math.random() * (StartingEdge.values().length + 1))];
+        StartingEdge startAt = StartingEdge.TOP;
         
         switch (startAt)
         {

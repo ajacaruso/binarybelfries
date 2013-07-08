@@ -17,7 +17,7 @@ public class SpriteTower extends RenderObject  {
     private PointF shootDir;
 
     static final private float c_playerRadius = 0.5f;
-    static final private float c_timeBetweenShots = 0.3f;
+    static final private float c_timeBetweenShots = 1.0f;
     
     public SpriteTower() {
     	super(c_playerRadius);
@@ -105,30 +105,32 @@ public class SpriteTower extends RenderObject  {
     	}
     }
     private void setRotationFromController(OuyaController c) {
-        float axisX = c.getAxisValue(OuyaController.AXIS_LS_X);
-        axisX = Math.min(axisX, 1.0f);
-        float axisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
-        axisY = Math.min(axisY, 1.0f);
-        
-        if (isStickNotCentered(axisX, axisY)) {
-            //Log.i("Game", "Y: "+axisY+" X: "+axisX);
-            float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
-            //Fix Inversion
-            rotation = angle * -1;
-            //Log.i("Game", "Test: "+angle);
-        }else{
-        	//check over stick
-            axisX = Math.min(c.getAxisValue(OuyaController.AXIS_RS_X), 1.0f);
-            axisY = Math.min(c.getAxisValue(OuyaController.AXIS_RS_Y), 1.0f);
-            
-            if (isStickNotCentered(axisX, axisY)) {
-                //Log.i("Game", "Y: "+axisY+" X: "+axisX);
-                float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
-                //Fix Inversion
-                rotation = angle * -1;
-                //Log.i("Game", "Test: "+angle);
-            }
-        }
+    	if (c != null) {
+	        float axisX = c.getAxisValue(OuyaController.AXIS_LS_X);
+	        axisX = Math.min(axisX, 1.0f);
+	        float axisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
+	        axisY = Math.min(axisY, 1.0f);
+	        
+	        if (isStickNotCentered(axisX, axisY)) {
+	            //Log.i("Game", "Y: "+axisY+" X: "+axisX);
+	            float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
+	            //Fix Inversion
+	            rotation = angle * -1;
+	            //Log.i("Game", "Test: "+angle);
+	        }else{
+	        	//check over stick
+	            axisX = Math.min(c.getAxisValue(OuyaController.AXIS_RS_X), 1.0f);
+	            axisY = Math.min(c.getAxisValue(OuyaController.AXIS_RS_Y), 1.0f);
+	            
+	            if (isStickNotCentered(axisX, axisY)) {
+	                //Log.i("Game", "Y: "+axisY+" X: "+axisX);
+	                float angle = (float) Math.toDegrees(Math.atan2(axisX, axisY));
+	                //Fix Inversion
+	                rotation = angle * -1;
+	                //Log.i("Game", "Test: "+angle);
+	            }
+	        }
+    	}
     }
     
     @Override
@@ -158,6 +160,7 @@ public class SpriteTower extends RenderObject  {
                 new SpriteBullet(this, translation.x + shootDir.x * c_bulletDistance, translation.y + shootDir.y * c_bulletDistance, desiredDir);
             }
         }
+        
         
     }
 

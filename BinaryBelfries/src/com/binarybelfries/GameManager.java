@@ -26,7 +26,7 @@ public class GameManager extends Activity {
 	        quitGame.setOnClickListener(new View.OnClickListener() {
 	            @Override
 	            public void onClick(View v) {
-	            	enemyFactory.endSpawning();
+	            	//enemyFactory.endSpawning();
 	                finish();
 	            }
 	        });
@@ -106,6 +106,6 @@ public class GameManager extends Activity {
 	    }
 	    
 	    private void createEnemyFactory(){
-	    	enemyFactory = new EnemyFactory(2, 2);
+	    	enemyFactory = new EnemyFactory();
 	    }
 }
